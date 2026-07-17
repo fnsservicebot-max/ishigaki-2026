@@ -59,6 +59,22 @@
         .tip-box { background: #fef2f2; border-radius: 8px; padding: 12px; margin-top: 10px; border-left: 3px solid #ef4444; font-size: 13px; color: #991b1b; line-height: 1.6; }
         .tip-box strong { color: #7f1d1d; }
 
+        /* 圖片 gallery */
+        .img-gallery { display: grid; gap: 6px; margin: 10px 0; }
+        .img-gallery.cols-1 { grid-template-columns: 1fr; }
+        .img-gallery.cols-2 { grid-template-columns: 1fr 1fr; }
+        .img-gallery.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+        .img-gallery img { width: 100%; height: 130px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); background: #e2e8f0; cursor: pointer; transition: transform 0.2s; display: block; }
+        .img-gallery img:active { transform: scale(0.97); }
+        .img-gallery.cols-1 img { height: 200px; }
+        .img-caption { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 2px; font-style: italic; }
+
+        /* 燈箱 */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        .lightbox.show { display: flex; }
+        .lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+        .lightbox-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 32px; cursor: pointer; background: rgba(255,255,255,0.15); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; line-height: 1; }
+
         .checklist-group { margin-bottom: 24px; }
         .checklist-group-title { font-size: 16px; font-weight: bold; color: #0369A1; border-bottom: 2px solid #bae6fd; padding-bottom: 6px; margin-bottom: 14px; }
         .check-item { display: flex; align-items: flex-start; margin-bottom: 12px; cursor: pointer; padding: 10px 12px; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
@@ -94,6 +110,7 @@
             .summary-grid { grid-template-columns: 1fr 1fr; }
             .time { width: 60px; font-size: 14px; }
             .event-group { width: calc(100% - 65px); }
+            .img-gallery.cols-3 img { height: 100px; }
         }
     </style>
 </head>
@@ -111,6 +128,16 @@
         <p>5 天 4 夜跳島之旅，從川平灣的玻璃底船，到幻之島的夢幻沙洲、竹富島的水牛車，再深入地底鐘乳洞，最後血拼伴手禮。</p>
     </div>
 
+    <div class="img-gallery cols-3">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Kabira_Bay_Ishigaki_Island23n4500.jpg/640px-Kabira_Bay_Ishigaki_Island23n4500.jpg" alt="川平灣" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="images/hamajima-phantom-island.jpg" alt="幻之島" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Taketomi_Island05s5s4592.jpg/640px-Taketomi_Island05s5s4592.jpg" alt="竹富島" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="images/fusaki-angel-pier-sunset.jpg" alt="Fusaki 棧橋夕陽" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Ishigaki_Stalactite_Cave_%2852117117523%29.jpg/640px-Ishigaki_Stalactite_Cave_%2852117117523%29.jpg" alt="石垣島鐘乳洞" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Ishigaki%27s_Sunset_beach_%2852117078526%29.jpg/640px-Ishigaki%27s_Sunset_beach_%2852117078526%29.jpg" alt="石垣島夕陽" loading="lazy" onclick="openLightbox(this.src)">
+    </div>
+    <div class="img-caption">圖片來源：Wikimedia Commons（CC 授權）+ AI 示意圖</div>
+
     <div class="summary-grid">
         <div class="summary-card"><div class="num">5</div><div class="label">天數</div></div>
         <div class="summary-card"><div class="num">3</div><div class="label">跳島行程</div></div>
@@ -120,46 +147,24 @@
 
     <div class="section-title">🍜 必吃美食</div>
     <div class="food-card">
-        <div class="food-name">BLUE CORAL 玻璃底船</div>
-        <div class="food-cat">🎫 體驗</div>
-        <div class="food-desc">川平灣唯一裝冷氣的遊船，出示台灣虎航機票享優惠價。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=BLUE+CORAL+川平灣" class="btn-map" target="_blank">📍 導航</a>
+        <div class="img-gallery cols-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Ishigaki_beef_sushi_%2820586849502%29.jpg/640px-Ishigaki_beef_sushi_%2820586849502%29.jpg" alt="石垣牛壽司" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ishigaki_BeefAndBeer.JPG/640px-Ishigaki_BeefAndBeer.JPG" alt="石垣牛燒肉" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gyu-jiru_Ishigakijima.jpg/640px-Gyu-jiru_Ishigakijima.jpg" alt="石垣牛湯" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
+        <div class="food-name" style="margin-top:10px;">🥩 石垣牛系列</div>
+        <div class="food-cat">🍱 必吃</div>
+        <div class="food-desc">石垣牛咖哩（ALOALO CAFE）、石垣牛起司漢堡（Corner's Grill）、石垣牛燒肉（石垣屋 / きたうち牧場）</div>
     </div>
     <div class="food-card">
-        <div class="food-name">ALOALO CAFE</div>
-        <div class="food-cat">🍛 咖啡廳</div>
-        <div class="food-desc">石垣牛咖哩＋海景，放鬆看海的好地方。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=ALOALO+CAFE+石垣島" class="btn-map" target="_blank">📍 導航</a>
-    </div>
-    <div class="food-card">
-        <div class="food-name">石垣屋</div>
-        <div class="food-cat">🥩 燒肉</div>
-        <div class="food-desc">最具沖繩建築特色的燒肉屋，傳統紅瓦屋頂。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=石垣屋+石垣島" class="btn-map" target="_blank">📍 導航</a>
-    </div>
-    <div class="food-card">
-        <div class="food-name">Corner's Grill</div>
-        <div class="food-cat">🍔 漢堡</div>
-        <div class="food-desc">石垣牛起司漢堡，市區近碼頭，順路必吃。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=Corner's+Grill+石垣島" class="btn-map" target="_blank">📍 導航</a>
-    </div>
-    <div class="food-card">
-        <div class="food-name">竹之子 Soba</div>
-        <div class="food-cat">🍜 沖繩麵</div>
-        <div class="food-desc">竹富島上有名沖繩麵店。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=竹の子+竹富島" class="btn-map" target="_blank">📍 導航</a>
-    </div>
-    <div class="food-card">
-        <div class="food-name">燒肉金城 きたうち牧場 浜崎本店</div>
-        <div class="food-cat">🥩 燒肉</div>
-        <div class="food-desc">石垣牛燒肉名店，必訪。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=きたうち牧場+浜崎本店+石垣島" class="btn-map" target="_blank">📍 導航</a>
-    </div>
-    <div class="food-card">
-        <div class="food-name">ゲンキみるく (石垣島の牛乳屋さん)</div>
-        <div class="food-cat">🍞 吐司</div>
-        <div class="food-desc">必買超濃郁 Q 彈吐司！</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=ゲンキみるく+石垣島" class="btn-map" target="_blank">📍 導航</a>
+        <div class="img-gallery cols-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Okinawa_soba_in_Yamabare_2.jpg/640px-Okinawa_soba_in_Yamabare_2.jpg" alt="沖繩麵" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Soki_soba_in_Naha.jpg/640px-Soki_soba_in_Naha.jpg" alt="Soki Soba" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Nankotsu_soba_%28Okinawa_soba%29.jpg/640px-Nankotsu_soba_%28Okinawa_soba%29.jpg" alt="軟骨麵" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
+        <div class="food-name" style="margin-top:10px;">🍜 沖繩麵</div>
+        <div class="food-cat">在地小吃</div>
+        <div class="food-desc">竹之子 Soba（竹富島）等名店。</div>
     </div>
 
     <div class="section-title">🧳 出發前必備清單</div>
@@ -231,12 +236,20 @@
     <div class="card highlight"><span class="time">08:35</span><div class="event-group">
         <div class="event">抵達石垣機場並取車 🚗</div>
         <div class="desc">從台灣虎航抵達新石垣機場（ISG），前往租車櫃檯取車，準備開始自駕。</div>
+        <div class="img-gallery cols-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Ishigaki_airport_3.jpg/640px-Ishigaki_airport_3.jpg" alt="新石垣機場" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Ishigaki_airport_gates_area.jpg/640px-Ishigaki_airport_gates_area.jpg" alt="機場報到大廳" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=新石垣空港" class="btn-map" target="_blank">📍 導航至新石垣機場</a>
     </div></div>
 
     <div class="card"><span class="time">上午</span><div class="event-group">
         <div class="event">川平灣 (Kabira Bay) 🌊</div>
         <div class="desc">搭乘<strong>玻璃底船</strong>欣賞珊瑚礁與熱帶魚。<strong>早上的光線最透亮</strong>，海面如玻璃般清澈，這就是傳說中的「川平藍」。</div>
+        <div class="img-gallery cols-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Kabira_Bay_Ishigaki_Island23n4500.jpg/640px-Kabira_Bay_Ishigaki_Island23n4500.jpg" alt="川平灣" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Kabira_Bay_43.jpg/640px-Kabira_Bay_43.jpg" alt="川平灣 2" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=川平湾+石垣島" class="btn-map" target="_blank">📍 導航至川平灣</a>
         <div class="meal-card">
             <div class="meal-title">🚤 BLUE CORAL 玻璃底船</div>
@@ -247,12 +260,22 @@
     <div class="card highlight"><span class="time">午餐</span><div class="event-group">
         <div class="event">ALOALO CAFE 🍛</div>
         <div class="desc">可以放鬆心情、欣賞石垣島美麗海景的咖啡館，主打<strong>石垣牛咖哩</strong>。</div>
+        <div class="img-gallery cols-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gyu-jiru_Ishigakijima.jpg/640px-Gyu-jiru_Ishigakijima.jpg" alt="石垣牛料理" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Ishigaki_beef_sushi_%2820586849502%29.jpg/640px-Ishigaki_beef_sushi_%2820586849502%29.jpg" alt="石垣牛壽司" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ishigaki_BeefAndBeer.JPG/640px-Ishigaki_BeefAndBeer.JPG" alt="石垣牛燒肉" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=ALOALO+CAFE+石垣島" class="btn-map" target="_blank">📍 導航至 ALOALO CAFE</a>
     </div></div>
 
     <div class="card"><span class="time">下午</span><div class="event-group">
         <div class="event">八重山民俗村 (Yaima Village) 🐒</div>
         <div class="desc">與<strong>松鼠猴互動</strong>的趣味景點。還有傳統紅瓦屋建築可以拍照。</div>
+        <div class="img-gallery cols-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Ishigaki_yaimamura_makishi_house.jpg/640px-Ishigaki_yaimamura_makishi_house.jpg" alt="紅瓦民宅" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Ishigaki_yaimamura_morita_house_1.jpg/640px-Ishigaki_yaimamura_morita_house_1.jpg" alt="森田家" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Ishigaki_yaimamura_water_baffalo_pond.jpg/640px-Ishigaki_yaimamura_water_baffalo_pond.jpg" alt="水牛池" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=八重山民俗村" class="btn-map" target="_blank">📍 導航至八重山民俗村</a>
         <div class="tip-box">
             <strong>⚠️ 松鼠猴互動提醒：</strong>松鼠猴雖然可愛，但<strong>極度熱情</strong>且會搜口袋、開包包拉鍊。進去互動區前，請務必把身上的小物件（墨鏡、耳環、零錢、手機吊飾）收進包包裡，<strong>包包一定要拉好拉鍊！</strong>
@@ -269,11 +292,19 @@
     <div class="card highlight"><span class="time">夕陽</span><div class="event-group">
         <div class="event">天使棧橋看夕陽 🌅</div>
         <div class="desc">在飯店的「天使棧橋」欣賞<strong>全島最美夕陽</strong>。</div>
+        <div class="img-gallery cols-1">
+            <img src="images/fusaki-angel-pier-sunset.jpg" alt="Fusaki 天使棧橋夕陽（示意圖）" loading="lazy" onclick="openLightbox(this.src)">
+            <div class="img-caption">✨ AI 示意圖</div>
+        </div>
     </div></div>
 
     <div class="card"><span class="time">晚餐</span><div class="event-group">
         <div class="event">石垣屋 🥩</div>
         <div class="desc">最具沖繩建築特色的燒肉屋，傳統紅瓦屋頂配燒肉。</div>
+        <div class="img-gallery cols-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ishigaki_BeefAndBeer.JPG/640px-Ishigaki_BeefAndBeer.JPG" alt="燒肉" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gyu-jiru_Ishigakijima.jpg/640px-Gyu-jiru_Ishigakijima.jpg" alt="牛料理" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=石垣屋+石垣島" class="btn-map" target="_blank">📍 導航至石垣屋</a>
     </div></div>
 </div>
@@ -288,17 +319,30 @@
     <div class="card"><span class="time">早上</span><div class="event-group">
         <div class="event">悠哉早餐 + 飯店海邊設施 🌊</div>
         <div class="desc">悠哉吃完早餐後在飯店享受海邊設施、沙灘、泳池。</div>
+        <div class="img-gallery cols-2">
+            <img src="images/fusaki-angel-pier-sunset.jpg" alt="Fusaki 海邊" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Okinawa_Nagura_Bay.jpg/640px-Okinawa_Nagura_Bay.jpg" alt="沖繩海灣" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
     </div></div>
 
     <div class="card highlight"><span class="time">午餐</span><div class="event-group">
         <div class="event">Corner's Grill 🍔</div>
         <div class="desc">石垣牛起司漢堡。這家漢堡店在<strong>市區靠近碼頭</strong>，直接步行或開車去吃非常順路。</div>
+        <div class="img-gallery cols-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Ishigaki_beef_sushi_%2820586849502%29.jpg/640px-Ishigaki_beef_sushi_%2820586849502%29.jpg" alt="石垣牛" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ishigaki_BeefAndBeer.JPG/640px-Ishigaki_BeefAndBeer.JPG" alt="燒肉" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gyu-jiru_Ishigakijima.jpg/640px-Gyu-jiru_Ishigakijima.jpg" alt="牛湯" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Corner's+Grill+石垣島" class="btn-map" target="_blank">📍 導航至 Corner's Grill</a>
     </div></div>
 
     <div class="card highlight"><span class="time">13:00</span><div class="event-group">
         <div class="event">幻之島 (Hamajima) 🏖️</div>
         <div class="desc">參加<strong>半日遊 Tour</strong>登陸夢幻之島。這座隨潮汐浮現的沙洲非常夢幻，是<strong>浮潛與拍照的首選</strong>。</div>
+        <div class="img-gallery cols-1">
+            <img src="images/hamajima-phantom-island.jpg" alt="幻之島（示意圖）" loading="lazy" onclick="openLightbox(this.src)">
+            <div class="img-caption">✨ AI 示意圖</div>
+        </div>
         <div class="meal-card">
             <div class="meal-title">💡 提醒</div>
             <div class="meal-desc">記得帶泳衣、防水手機袋、防曬！船班依潮汐時間調整。</div>
@@ -328,15 +372,28 @@
     <div class="card highlight"><span class="time">中午</span><div class="event-group">
         <div class="event">竹富島搭船 🚢</div>
         <div class="desc">從石垣港直接搭船前往竹富島，航程約 10-15 分鐘。</div>
+        <div class="img-gallery cols-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Taketomi_Island05s5s4592.jpg/640px-Taketomi_Island05s5s4592.jpg" alt="竹富島" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Taketomi_island_-_Okinawa_Japan.jpg/640px-Taketomi_island_-_Okinawa_Japan.jpg" alt="竹富島" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=石垣港+離島ターミナル" class="btn-map" target="_blank">📍 導航至石垣港離島碼頭</a>
     </div></div>
 
     <div class="card highlight"><span class="time">13:00</span><div class="event-group">
         <div class="event">水牛車遊竹富島 🐃</div>
         <div class="desc">預約 13:00 水牛車，<strong>漫步在白砂與紅瓦民宅間</strong>，感受沖繩古老氛圍。</div>
+        <div class="img-gallery cols-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/JP-47_Taketomi_Water-buffalo-taxi.jpg/640px-JP-47_Taketomi_Water-buffalo-taxi.jpg" alt="水牛車" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Water_buffalo_Taketomijima.jpg/640px-Water_buffalo_Taketomijima.jpg" alt="竹富水牛" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Water_buffalo_taxi.jpg/640px-Water_buffalo_taxi.jpg" alt="水牛車" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <div class="meal-card">
             <div class="meal-title">📍 必訪景點</div>
             <div class="meal-desc">西棧橋（看海）、星砂濱 (Kaiji Beach) 尋找<strong>星砂</strong>。</div>
+        </div>
+        <div class="img-gallery cols-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Walk_in_Taketomijima_35.jpg/640px-Walk_in_Taketomijima_35.jpg" alt="竹富巷弄" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Taketomi_island_-_Okinawa_Japan.jpg/640px-Taketomi_island_-_Okinawa_Japan.jpg" alt="紅瓦" loading="lazy" onclick="openLightbox(this.src)">
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=竹富島" class="btn-map" target="_blank">📍 導航至竹富島</a>
     </div></div>
@@ -344,18 +401,31 @@
     <div class="card"><span class="time">午餐</span><div class="event-group">
         <div class="event">竹之子 Soba 🍜</div>
         <div class="desc">可先在港口附近吃，或者竹富島上有幾間很有名的沖繩麵（例如：<strong>竹之子 Soba</strong>）。</div>
+        <div class="img-gallery cols-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Okinawa_soba_in_Yamabare_2.jpg/640px-Okinawa_soba_in_Yamabare_2.jpg" alt="沖繩麵" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Soki_soba_in_Naha.jpg/640px-Soki_soba_in_Naha.jpg" alt="Soki Soba" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Nankotsu_soba_%28Okinawa_soba%29.jpg/640px-Nankotsu_soba_%28Okinawa_soba%29.jpg" alt="軟骨麵" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=竹の子+竹富島" class="btn-map" target="_blank">📍 導航至竹之子</a>
     </div></div>
 
     <div class="card highlight"><span class="time">晚餐</span><div class="event-group">
         <div class="event">燒肉金城 きたうち牧場 浜崎本店 🥩</div>
         <div class="desc">石垣牛燒肉名店，必訪！</div>
+        <div class="img-gallery cols-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ishigaki_BeefAndBeer.JPG/640px-Ishigaki_BeefAndBeer.JPG" alt="燒肉" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gyu-jiru_Ishigakijima.jpg/640px-Gyu-jiru_Ishigakijima.jpg" alt="牛湯" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=きたうち牧場+浜崎本店+石垣島" class="btn-map" target="_blank">📍 導航至きたうち牧場</a>
     </div></div>
 
     <div class="card highlight"><span class="time">19:30</span><div class="event-group">
         <div class="event">夜間星空 & 叢林夜遊 🌌</div>
         <div class="desc">探索與白天截然不同的石垣島夜晚風貌。</div>
+        <div class="img-gallery cols-1">
+            <img src="images/ishigaki-night-jungle-stars.jpg" alt="星空叢林（示意圖）" loading="lazy" onclick="openLightbox(this.src)">
+            <div class="img-caption">✨ AI 示意圖</div>
+        </div>
     </div></div>
 
     <div class="card"><span class="time">晚上</span><div class="event-group">
@@ -375,11 +445,17 @@
     <div class="card highlight"><span class="time">上午</span><div class="event-group">
         <div class="event">石垣島鐘乳洞 🦇</div>
         <div class="desc">感受涼爽的地下宮殿與夢幻燈光，步行時間約<strong>30 分鐘</strong>。</div>
+        <div class="img-gallery cols-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Ishigaki_Stalactite_Cave_%2852117117523%29.jpg/640px-Ishigaki_Stalactite_Cave_%2852117117523%29.jpg" alt="鐘乳洞" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ishigaki_Stalactite_Cave_%2852117077161%29.jpg/640px-Ishigaki_Stalactite_Cave_%2852117077161%29.jpg" alt="鐘乳洞 2" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Ishigaki_Stalactite_Cave_11.jpg/640px-Ishigaki_Stalactite_Cave_11.jpg" alt="鐘乳洞 3" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/?api=1&query=石垣島鍾乳洞" class="btn-map" target="_blank">📍 導航至石垣島鐘乳洞</a>
     </div></div>
 
     <div class="card"><span class="time">午餐</span><div class="event-group">
         <div class="event">隨意吃 🍜</div>
+        <div class="desc">市區隨意吃。</div>
     </div></div>
 
     <div class="card highlight"><span class="time">下午</span><div class="event-group">
@@ -422,6 +498,10 @@
     <div class="card highlight"><span class="time">09:25</span><div class="event-group">
         <div class="event">班機起飛返台 ✈️</div>
         <div class="desc">搭機返回台灣，結束 5 天 4 夜石垣島跳島之旅。</div>
+        <div class="img-gallery cols-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Ishigaki_airport_3.jpg/640px-Ishigaki_airport_3.jpg" alt="新石垣機場" loading="lazy" onclick="openLightbox(this.src)">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Ishigaki_airport_gates_area.jpg/640px-Ishigaki_airport_gates_area.jpg" alt="報到大廳" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
         <a href="https://www.google.com/maps/search/?api=1&query=新石垣空港" class="btn-map" target="_blank">📍 導航至新石垣機場</a>
         <div class="meal-card">
             <div class="meal-title">💡 提醒</div>
@@ -431,6 +511,12 @@
 </div>
 
 </div>
+</div>
+
+<!-- 燈箱 -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-close">×</div>
+    <img id="lightbox-img" src="" alt="">
 </div>
 
 <!-- 底部導覽 -->
@@ -473,6 +559,15 @@
 
     function goHome() {
         showDay('d1', document.querySelector('.tab-scroll-container .tab-btn'));
+    }
+
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').classList.add('show');
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('show');
     }
 </script>
 
