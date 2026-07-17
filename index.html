@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 盛夏沖繩前哨站・石垣島 5 日瘋</title>
+    <meta name="theme-color" content="#0369A1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="石垣島 5 日瘋">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="石垣島 5 日瘋">
+    <link rel="apple-touch-icon" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f33b.png">
+    <link rel="icon" type="image/png" sizes="72x72" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f33b.png">
+    <link rel="manifest" href='data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%222026%E7%9B%9B%E5%A4%8F%E6%B2%96%E7%B9%A9%E5%89%8D%E5%93%A8%E7%AB%99%E3%83%BB%E7%9F%B3%E5%9E%A2%E5%B3%B6%205%E6%97%A5%E7%98%8B%22%2C%22short_name%22%3A%22%E7%9F%B3%E5%9E%A2%E5%B3%B6%22%2C%22display%22%3A%22standalone%22%2C%22start_url%22%3A%22.%2F%22%2C%22background_color%22%3A%22%23F0F9FF%22%2C%22theme_color%22%3A%22%230369A1%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdnjs.cloudflare.com%2Fajax%2Flibs%2Ftwemoji%2F14.0.2%2Fsvg%2F1f33b.svg%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fcdnjs.cloudflare.com%2Fajax%2Flibs%2Ftwemoji%2F14.0.2%2F72x72%2F1f33b.png%22%2C%22sizes%22%3A%2272x72%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D'>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "PingFang TC", "Microsoft JhengHei", sans-serif; background-color: #F0F9FF; margin: 0; padding-bottom: 80px; color: #0F172A; }
+        .header { background: linear-gradient(135deg, #0369A1 0%, #0891B2 60%, #14B8A6 100%); color: white; padding: 18px 16px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .header h1 { margin: 0; font-size: 18px; letter-spacing: 0.5px; }
+        .header .sub { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+
+        .tab-scroll-container { background: linear-gradient(135deg, #0369A1 0%, #0891B2 100%); position: sticky; top: 65px; z-index: 99; overflow-x: auto; white-space: nowrap; padding: 0 10px 12px; }
+        .tab-scroll-container::-webkit-scrollbar { display: none; }
+        .tab-btn { background: rgba(255,255,255,0.2); color: #cffafe; border: none; padding: 8px 16px; border-radius: 20px; font-size: 14px; margin-right: 8px; cursor: pointer; transition: all 0.2s; font-weight: 600; }
+        .tab-btn.active { background: white; color: #0369A1; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+
+        .container { padding: 16px; max-width: 800px; margin: 0 auto; }
+
+        .day-content { display: none; }
+        .day-content.active { display: block; }
+
+        .date-header { font-size: 19px; font-weight: bold; margin: 8px 0 16px; border-left: 4px solid #0369A1; padding-left: 10px; color: #0c4a6e; display: flex; justify-content: space-between; align-items: center; }
+        .weather-btn { background: #F59E0B; color: white; padding: 5px 12px; border-radius: 14px; font-size: 12px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .weather-btn:active { opacity: 0.85; }
+
+        .card { background: white; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 4px solid #cbd5e1; }
+        .card.highlight { border-left: 4px solid #F59E0B; background: linear-gradient(135deg, #fffbeb 0%, #ffffff 60%); }
+        .card.tips { border-left: 4px solid #ef4444; background: linear-gradient(135deg, #fef2f2 0%, #ffffff 60%); }
+
+        .time { color: #0369A1; font-weight: 800; display: inline-block; width: 70px; vertical-align: top; font-size: 15px; }
+        .event-group { display: inline-block; width: calc(100% - 75px); }
+        .event { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #0f172a; }
+        .desc { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 8px; }
+        .desc strong { color: #0369A1; }
+
+        .hotel-tag { font-size: 13px; color: #065f46; background: #d1fae5; padding: 6px 10px; border-radius: 6px; display: inline-block; font-weight: 600; margin-bottom: 8px; border-left: 3px solid #10b981; }
+
+        .drive-info { background: #f0fdf4; color: #166534; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-top: 8px; border-left: 3px solid #10b981; display: inline-block; }
+
+        .btn-map, .btn-link { display: block; text-align: center; padding: 10px 12px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: bold; margin-top: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s; }
+        .btn-map { background: #4285F4; color: white; }
+        .btn-map:active { opacity: 0.85; }
+
+        .meal-card { background: linear-gradient(135deg, #fef3c7 0%, #ffffff 80%); border-radius: 10px; padding: 12px 14px; margin-top: 8px; border-left: 3px solid #F59E0B; }
+        .meal-card .meal-title { font-size: 14px; font-weight: bold; color: #92400e; margin-bottom: 4px; }
+        .meal-card .meal-desc { font-size: 13px; color: #78350f; line-height: 1.5; margin-bottom: 6px; }
+        .meal-card .meal-tip { font-size: 12px; color: #b45309; font-style: italic; }
+
+        .tip-box { background: #fef2f2; border-radius: 8px; padding: 12px; margin-top: 10px; border-left: 3px solid #ef4444; font-size: 13px; color: #991b1b; line-height: 1.6; }
+        .tip-box strong { color: #7f1d1d; }
+
+        .checklist-group { margin-bottom: 24px; }
+        .checklist-group-title { font-size: 16px; font-weight: bold; color: #0369A1; border-bottom: 2px solid #bae6fd; padding-bottom: 6px; margin-bottom: 14px; }
+        .check-item { display: flex; align-items: flex-start; margin-bottom: 12px; cursor: pointer; padding: 10px 12px; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .check-item input[type="checkbox"] { margin-top: 3px; margin-right: 12px; width: 18px; height: 18px; accent-color: #14B8A6; cursor: pointer; flex-shrink: 0; }
+        .check-text { font-size: 15px; color: #334155; line-height: 1.4; }
+        .check-subtext { font-size: 12px; color: #64748b; margin-top: 2px; }
+        .check-item input[type="checkbox"]:checked + .check-text-box .check-text { color: #94a3b8; text-decoration: line-through; }
+
+        .budget-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; background: white; border-radius: 8px; overflow: hidden; }
+        .budget-table th, .budget-table td { border-bottom: 1px solid #e2e8f0; padding: 12px; text-align: left; }
+        .budget-table th { background: #e0f2fe; color: #0369A1; font-weight: bold; }
+        .budget-table tr:last-child td { border-bottom: none; }
+        .total-row { font-weight: bold; background: #fef3c7 !important; color: #92400e; }
+        .total-row td { border-top: 2px solid #F59E0B !important; }
+
+        .food-card { background: white; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); border-left: 4px solid #14B8A6; }
+        .food-card .food-name { font-size: 15px; font-weight: bold; color: #134e4a; margin-bottom: 4px; }
+        .food-card .food-desc { font-size: 13px; color: #475569; margin-bottom: 6px; }
+        .food-card .food-cat { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; background: #ccfbf1; color: #0f766e; font-weight: 600; margin-right: 6px; }
+
+        .section-title { font-size: 22px; font-weight: bold; color: #0c4a6e; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 3px solid #14B8A6; display: flex; align-items: center; gap: 8px; }
+
+        .welcome-banner { background: linear-gradient(135deg, #0EA5E9 0%, #14B8A6 100%); border-radius: 16px; padding: 20px; margin-bottom: 20px; color: white; box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2); }
+        .welcome-banner h2 { margin: 0 0 6px; font-size: 20px; }
+        .welcome-banner p { margin: 0; opacity: 0.95; font-size: 14px; line-height: 1.5; }
+
+        .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .summary-card { background: white; border-radius: 10px; padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); text-align: center; }
+        .summary-card .num { font-size: 24px; font-weight: 800; color: #0369A1; }
+        .summary-card .label { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+        @media (max-width: 480px) {
+            .summary-grid { grid-template-columns: 1fr 1fr; }
+            .time { width: 60px; font-size: 14px; }
+            .event-group { width: calc(100% - 65px); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🌺 2026 盛夏沖繩前哨站・石垣島 5 日瘋</h1>
+    <div class="sub">2026.06.19 (五) ～ 2026.06.23 (二) ｜ 西海岸・幻之島・竹富島・地底奇景</div>
+</div>
+
+<!-- 總覽 -->
+<div class="container" id="overview" style="display:none;">
+    <div class="welcome-banner">
+        <h2>🌊 歡迎來到石垣島！</h2>
+        <p>5 天 4 夜跳島之旅，從川平灣的玻璃底船，到幻之島的夢幻沙洲、竹富島的水牛車，再深入地底鐘乳洞，最後血拼伴手禮。</p>
+    </div>
+
+    <div class="summary-grid">
+        <div class="summary-card"><div class="num">5</div><div class="label">天數</div></div>
+        <div class="summary-card"><div class="num">3</div><div class="label">跳島行程</div></div>
+        <div class="summary-card"><div class="num">2</div><div class="label">飯店</div></div>
+        <div class="summary-card"><div class="num">∞</div><div class="label">回憶</div></div>
+    </div>
+
+    <div class="section-title">🍜 必吃美食</div>
+    <div class="food-card">
+        <div class="food-name">BLUE CORAL 玻璃底船</div>
+        <div class="food-cat">🎫 體驗</div>
+        <div class="food-desc">川平灣唯一裝冷氣的遊船，出示台灣虎航機票享優惠價。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=BLUE+CORAL+川平灣" class="btn-map" target="_blank">📍 導航</a>
+    </div>
+    <div class="food-card">
+        <div class="food-name">ALOALO CAFE</div>
+        <div class="food-cat">🍛 咖啡廳</div>
+        <div class="food-desc">石垣牛咖哩＋海景，放鬆看海的好地方。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ALOALO+CAFE+石垣島" class="btn-map" target="_blank">📍 導航</a>
+    </div>
+    <div class="food-card">
+        <div class="food-name">石垣屋</div>
+        <div class="food-cat">🥩 燒肉</div>
+        <div class="food-desc">最具沖繩建築特色的燒肉屋，傳統紅瓦屋頂。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=石垣屋+石垣島" class="btn-map" target="_blank">📍 導航</a>
+    </div>
+    <div class="food-card">
+        <div class="food-name">Corner's Grill</div>
+        <div class="food-cat">🍔 漢堡</div>
+        <div class="food-desc">石垣牛起司漢堡，市區近碼頭，順路必吃。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Corner's+Grill+石垣島" class="btn-map" target="_blank">📍 導航</a>
+    </div>
+    <div class="food-card">
+        <div class="food-name">竹之子 Soba</div>
+        <div class="food-cat">🍜 沖繩麵</div>
+        <div class="food-desc">竹富島上有名沖繩麵店。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=竹の子+竹富島" class="btn-map" target="_blank">📍 導航</a>
+    </div>
+    <div class="food-card">
+        <div class="food-name">燒肉金城 きたうち牧場 浜崎本店</div>
+        <div class="food-cat">🥩 燒肉</div>
+        <div class="food-desc">石垣牛燒肉名店，必訪。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=きたうち牧場+浜崎本店+石垣島" class="btn-map" target="_blank">📍 導航</a>
+    </div>
+    <div class="food-card">
+        <div class="food-name">ゲンキみるく (石垣島の牛乳屋さん)</div>
+        <div class="food-cat">🍞 吐司</div>
+        <div class="food-desc">必買超濃郁 Q 彈吐司！</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ゲンキみるく+石垣島" class="btn-map" target="_blank">📍 導航</a>
+    </div>
+
+    <div class="section-title">🧳 出發前必備清單</div>
+    <div class="checklist-group">
+        <div class="checklist-group-title">🛂 證件與海關</div>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">護照正本</div><div class="check-subtext">效期需超過 6 個月</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">Visit Japan Web (VJW) QR Code</div><div class="check-subtext">入境審查與海關申報，建議截圖存手機</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">實體信用卡 + 日幣現金</div><div class="check-subtext">多帶幾張不同銀行的卡備用</div></div></label>
+    </div>
+    <div class="checklist-group">
+        <div class="checklist-group-title">🚗 自駕必備</div>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">台灣駕照正本</div><div class="check-subtext">⚠️ 沒帶正本就算有譯本也絕對無法租車</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">駕照日文譯本正本</div><div class="check-subtext">請提前至台灣監理所申請</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">租車預約確認信</div><div class="check-subtext">印出紙本或截圖，方便核對預約編號</div></div></label>
+    </div>
+    <div class="checklist-group">
+        <div class="checklist-group-title">👕 夏季衣物</div>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">防曬乳、墨鏡、遮陽帽</div><div class="check-subtext">石垣島夏天超曬</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">泳衣、浮潛用具</div><div class="check-subtext">幻之島必備</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">薄外套（車上冷氣強）</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">好走休閒鞋 / 拖鞋</div><div class="check-subtext">沙灘用拖鞋</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">輕便雨衣 / 折傘</div><div class="check-subtext">6 月是梅雨季尾聲</div></div></label>
+    </div>
+    <div class="checklist-group">
+        <div class="checklist-group-title">🔋 電子產品</div>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">eSIM 或實體上網卡</div><div class="check-subtext">自駕導航依賴網路，建議準備雙備援</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">行動電源 + 充電線</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">防水手機袋</div><div class="check-subtext">浮潛時保護手機</div></div></label>
+        <label class="check-item"><input type="checkbox"><div class="check-text-box"><div class="check-text">大容量環保購物袋</div><div class="check-subtext">唐吉訶德爆買必備</div></div></label>
+    </div>
+
+    <div class="section-title">💰 預算估算</div>
+    <table class="budget-table">
+        <thead><tr><th>項目</th><th>預估金額</th><th>備註</th></tr></thead>
+        <tbody>
+            <tr><td>✈️ 來回機票</td><td>NT$ ____</td><td>虎航 TPE➔ISG</td></tr>
+            <tr><td>🚗 租車費（4 天）</td><td>¥ ____</td><td>含保險</td></tr>
+            <tr><td>⛽ 油資</td><td>¥ ____</td><td>約 200 km</td></tr>
+            <tr><td>🏨 Fusaki Beach Resort</td><td>¥ ____</td><td>2 晚</td></tr>
+            <tr><td>🏨 Art Hotel Ishigakijima</td><td>¥ ____</td><td>2 晚</td></tr>
+            <tr><td>🎫 跳島 Tour</td><td>¥ ____</td><td>幻之島半日遊</td></tr>
+            <tr><td>🍜 餐飲</td><td>¥ ____</td><td>5 天餐費</td></tr>
+            <tr><td>🎁 伴手禮</td><td>¥ ____</td><td>唐吉訶德 + MaxValu</td></tr>
+            <tr class="total-row"><td>💰 總計</td><td>¥ ____</td><td>約 NT$ ____</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Day tabs -->
+<div id="view-itinerary">
+<div class="tab-scroll-container">
+    <button class="tab-btn active" onclick="showDay('d1', this)">6/19 (五)</button>
+    <button class="tab-btn" onclick="showDay('d2', this)">6/20 (六)</button>
+    <button class="tab-btn" onclick="showDay('d3', this)">6/21 (日)</button>
+    <button class="tab-btn" onclick="showDay('d4', this)">6/22 (一)</button>
+    <button class="tab-btn" onclick="showDay('d5', this)">6/23 (二)</button>
+    <button class="tab-btn" onclick="showOverview(this)">📋 總覽</button>
+</div>
+
+<div class="container">
+
+<!-- Day 1: 6/19 川平藍與松鼠猴的西海岸巡禮 -->
+<div id="d1" class="day-content active">
+    <div class="date-header">
+        <span>🌊 6/19 (五) | 川平藍與松鼠猴</span>
+        <a href="https://www.jma.go.jp/bosai/forecast/area/470000" target="_blank" class="weather-btn">⛅ 天氣</a>
+    </div>
+
+    <div class="card highlight"><span class="time">08:35</span><div class="event-group">
+        <div class="event">抵達石垣機場並取車 🚗</div>
+        <div class="desc">從台灣虎航抵達新石垣機場（ISG），前往租車櫃檯取車，準備開始自駕。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=新石垣空港" class="btn-map" target="_blank">📍 導航至新石垣機場</a>
+    </div></div>
+
+    <div class="card"><span class="time">上午</span><div class="event-group">
+        <div class="event">川平灣 (Kabira Bay) 🌊</div>
+        <div class="desc">搭乘<strong>玻璃底船</strong>欣賞珊瑚礁與熱帶魚。<strong>早上的光線最透亮</strong>，海面如玻璃般清澈，這就是傳說中的「川平藍」。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=川平湾+石垣島" class="btn-map" target="_blank">📍 導航至川平灣</a>
+        <div class="meal-card">
+            <div class="meal-title">🚤 BLUE CORAL 玻璃底船</div>
+            <div class="meal-desc">川平灣<strong>唯一裝冷氣</strong>的遊船，出示台灣虎航機票還享有船票優惠價！</div>
+        </div>
+    </div></div>
+
+    <div class="card highlight"><span class="time">午餐</span><div class="event-group">
+        <div class="event">ALOALO CAFE 🍛</div>
+        <div class="desc">可以放鬆心情、欣賞石垣島美麗海景的咖啡館，主打<strong>石垣牛咖哩</strong>。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ALOALO+CAFE+石垣島" class="btn-map" target="_blank">📍 導航至 ALOALO CAFE</a>
+    </div></div>
+
+    <div class="card"><span class="time">下午</span><div class="event-group">
+        <div class="event">八重山民俗村 (Yaima Village) 🐒</div>
+        <div class="desc">與<strong>松鼠猴互動</strong>的趣味景點。還有傳統紅瓦屋建築可以拍照。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=八重山民俗村" class="btn-map" target="_blank">📍 導航至八重山民俗村</a>
+        <div class="tip-box">
+            <strong>⚠️ 松鼠猴互動提醒：</strong>松鼠猴雖然可愛，但<strong>極度熱情</strong>且會搜口袋、開包包拉鍊。進去互動區前，請務必把身上的小物件（墨鏡、耳環、零錢、手機吊飾）收進包包裡，<strong>包包一定要拉好拉鍊！</strong>
+        </div>
+    </div></div>
+
+    <div class="card highlight"><span class="time">傍晚</span><div class="event-group">
+        <div class="event">Fusaki Beach Resort Check-in 🏨</div>
+        <div class="desc">入住海濱度假村，享用飯店設施。</div>
+        <div class="hotel-tag">🏨 宿：Fusaki Beach Resort</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Fusaki+Beach+Resort+石垣島" class="btn-map" target="_blank">📍 導航至 Fusaki Beach Resort</a>
+    </div></div>
+
+    <div class="card highlight"><span class="time">夕陽</span><div class="event-group">
+        <div class="event">天使棧橋看夕陽 🌅</div>
+        <div class="desc">在飯店的「天使棧橋」欣賞<strong>全島最美夕陽</strong>。</div>
+    </div></div>
+
+    <div class="card"><span class="time">晚餐</span><div class="event-group">
+        <div class="event">石垣屋 🥩</div>
+        <div class="desc">最具沖繩建築特色的燒肉屋，傳統紅瓦屋頂配燒肉。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=石垣屋+石垣島" class="btn-map" target="_blank">📍 導航至石垣屋</a>
+    </div></div>
+</div>
+
+<!-- Day 2: 6/20 夢幻沙洲 -->
+<div id="d2" class="day-content">
+    <div class="date-header">
+        <span>🏝️ 6/20 (六) | 夢幻沙洲（跳島日）</span>
+        <a href="https://www.jma.go.jp/bosai/forecast/area/470000" target="_blank" class="weather-btn">⛅ 天氣</a>
+    </div>
+
+    <div class="card"><span class="time">早上</span><div class="event-group">
+        <div class="event">悠哉早餐 + 飯店海邊設施 🌊</div>
+        <div class="desc">悠哉吃完早餐後在飯店享受海邊設施、沙灘、泳池。</div>
+    </div></div>
+
+    <div class="card highlight"><span class="time">午餐</span><div class="event-group">
+        <div class="event">Corner's Grill 🍔</div>
+        <div class="desc">石垣牛起司漢堡。這家漢堡店在<strong>市區靠近碼頭</strong>，直接步行或開車去吃非常順路。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Corner's+Grill+石垣島" class="btn-map" target="_blank">📍 導航至 Corner's Grill</a>
+    </div></div>
+
+    <div class="card highlight"><span class="time">13:00</span><div class="event-group">
+        <div class="event">幻之島 (Hamajima) 🏖️</div>
+        <div class="desc">參加<strong>半日遊 Tour</strong>登陸夢幻之島。這座隨潮汐浮現的沙洲非常夢幻，是<strong>浮潛與拍照的首選</strong>。</div>
+        <div class="meal-card">
+            <div class="meal-title">💡 提醒</div>
+            <div class="meal-desc">記得帶泳衣、防水手機袋、防曬！船班依潮汐時間調整。</div>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=幻の島+浜島+石垣島" class="btn-map" target="_blank">📍 導航至幻之島</a>
+    </div></div>
+
+    <div class="card"><span class="time">晚餐</span><div class="event-group">
+        <div class="event">飯店內餐廳 or 外出覓食 🍽️</div>
+        <div class="desc">看當天體力狀況決定，可直接在 Fusaki 飯店內享用 buffet，或再開車出去市區覓食。</div>
+    </div></div>
+</div>
+
+<!-- Day 3: 6/21 竹富島水牛車 -->
+<div id="d3" class="day-content">
+    <div class="date-header">
+        <span>🐃 6/21 (日) | 竹富島水牛車（跳島日）</span>
+        <a href="https://www.jma.go.jp/bosai/forecast/area/470000" target="_blank" class="weather-btn">⛅ 天氣</a>
+    </div>
+
+    <div class="card"><span class="time">早上</span><div class="event-group">
+        <div class="event">Fusaki 退房 🚗</div>
+        <div class="desc">Fusaki Beach Resort 退房，前往 Art Hotel Ishigakijima 寄放行李。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Art+Hotel+Ishigakijima" class="btn-map" target="_blank">📍 導航至 Art Hotel Ishigakijima</a>
+    </div></div>
+
+    <div class="card highlight"><span class="time">中午</span><div class="event-group">
+        <div class="event">竹富島搭船 🚢</div>
+        <div class="desc">從石垣港直接搭船前往竹富島，航程約 10-15 分鐘。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=石垣港+離島ターミナル" class="btn-map" target="_blank">📍 導航至石垣港離島碼頭</a>
+    </div></div>
+
+    <div class="card highlight"><span class="time">13:00</span><div class="event-group">
+        <div class="event">水牛車遊竹富島 🐃</div>
+        <div class="desc">預約 13:00 水牛車，<strong>漫步在白砂與紅瓦民宅間</strong>，感受沖繩古老氛圍。</div>
+        <div class="meal-card">
+            <div class="meal-title">📍 必訪景點</div>
+            <div class="meal-desc">西棧橋（看海）、星砂濱 (Kaiji Beach) 尋找<strong>星砂</strong>。</div>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=竹富島" class="btn-map" target="_blank">📍 導航至竹富島</a>
+    </div></div>
+
+    <div class="card"><span class="time">午餐</span><div class="event-group">
+        <div class="event">竹之子 Soba 🍜</div>
+        <div class="desc">可先在港口附近吃，或者竹富島上有幾間很有名的沖繩麵（例如：<strong>竹之子 Soba</strong>）。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=竹の子+竹富島" class="btn-map" target="_blank">📍 導航至竹之子</a>
+    </div></div>
+
+    <div class="card highlight"><span class="time">晚餐</span><div class="event-group">
+        <div class="event">燒肉金城 きたうち牧場 浜崎本店 🥩</div>
+        <div class="desc">石垣牛燒肉名店，必訪！</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=きたうち牧場+浜崎本店+石垣島" class="btn-map" target="_blank">📍 導航至きたうち牧場</a>
+    </div></div>
+
+    <div class="card highlight"><span class="time">19:30</span><div class="event-group">
+        <div class="event">夜間星空 & 叢林夜遊 🌌</div>
+        <div class="desc">探索與白天截然不同的石垣島夜晚風貌。</div>
+    </div></div>
+
+    <div class="card"><span class="time">晚上</span><div class="event-group">
+        <div class="event">回 Art Hotel 大浴場泡湯 🛁</div>
+        <div class="desc">結束整天行程，回飯店大浴場泡湯放鬆。</div>
+        <div class="hotel-tag">🏨 宿：Art Hotel Ishigakijima</div>
+    </div></div>
+</div>
+
+<!-- Day 4: 6/22 深入地底奇景 + 採購 -->
+<div id="d4" class="day-content">
+    <div class="date-header">
+        <span>🦇 6/22 (一) | 深入地底奇景 + 採購</span>
+        <a href="https://www.jma.go.jp/bosai/forecast/area/470000" target="_blank" class="weather-btn">⛅ 天氣</a>
+    </div>
+
+    <div class="card highlight"><span class="time">上午</span><div class="event-group">
+        <div class="event">石垣島鐘乳洞 🦇</div>
+        <div class="desc">感受涼爽的地下宮殿與夢幻燈光，步行時間約<strong>30 分鐘</strong>。</div>
+        <a href="https://www.google.com/maps/?api=1&query=石垣島鍾乳洞" class="btn-map" target="_blank">📍 導航至石垣島鐘乳洞</a>
+    </div></div>
+
+    <div class="card"><span class="time">午餐</span><div class="event-group">
+        <div class="event">隨意吃 🍜</div>
+    </div></div>
+
+    <div class="card highlight"><span class="time">下午</span><div class="event-group">
+        <div class="event">ゲンキみるく 必買 🍞</div>
+        <div class="desc"><strong>石垣島の牛乳屋さんのお店 ゲンキみるく</strong>，必買超濃郁 Q 彈吐司！</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ゲンキみるく+石垣島" class="btn-map" target="_blank">📍 導航至ゲンキみるく</a>
+    </div></div>
+
+    <div class="card"><span class="time">下午</span><div class="event-group">
+        <div class="event">逛街採購行程 🛍️</div>
+        <div class="desc">石垣島伴手禮採購攻略：</div>
+        <div class="meal-card">
+            <div class="meal-title">🏪 採購清單</div>
+            <div class="meal-desc">
+                • <strong>Euglena Mall（公設市場）</strong>：步行可達，買石垣鹽、辣油、織布<br>
+                • <strong>唐吉訶德</strong>：全島品項最全，免稅品一次買齊<br>
+                • <strong>AEON MaxValu 超市</strong>：零食、石垣牛、泡麵<br>
+                • <strong>EDION 電器行</strong><br>
+                • <strong>SAN-A 石垣 City</strong>
+            </div>
+        </div>
+        <div class="tip-box">
+            <strong>💡 採購秘訣：</strong>先去唐吉訶德買藥妝與免稅品，最後再去 MaxValu 掃蕩零食與飲料。MaxValu 旁邊還有一間大的藥妝店 <strong>Drug Eleven</strong>，如果唐吉訶德缺貨可以在這裡補齊。
+        </div>
+    </div></div>
+
+    <div class="card highlight"><span class="time">19:00</span><div class="event-group">
+        <div class="event">還車 🚗</div>
+        <div class="desc">19:00 前還車，步行回飯店整理行李，準備隔天早起。</div>
+    </div></div>
+</div>
+
+<!-- Day 5: 6/23 返台 -->
+<div id="d5" class="day-content">
+    <div class="date-header">
+        <span>✈️ 6/23 (二) | 賦歸</span>
+        <a href="https://www.jma.go.jp/bosai/forecast/area/470000" target="_blank" class="weather-btn">⛅ 天氣</a>
+    </div>
+
+    <div class="card highlight"><span class="time">09:25</span><div class="event-group">
+        <div class="event">班機起飛返台 ✈️</div>
+        <div class="desc">搭機返回台灣，結束 5 天 4 夜石垣島跳島之旅。</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=新石垣空港" class="btn-map" target="_blank">📍 導航至新石垣機場</a>
+        <div class="meal-card">
+            <div class="meal-title">💡 提醒</div>
+            <div class="meal-desc">建議提早 2 小時到機場，處理伴手禮托運與退税。</div>
+        </div>
+    </div></div>
+</div>
+
+</div>
+</div>
+
+<!-- 底部導覽 -->
+<div class="tab-scroll-container" style="position:fixed;bottom:0;top:auto;background:white;border-top:1px solid #bae6fd;padding:10px;display:flex;justify-content:space-around;box-shadow:0 -2px 8px rgba(0,0,0,0.1);">
+    <button class="tab-btn" onclick="goHome()" style="background:#e0f2fe;color:#0369A1;">🏠 行程</button>
+    <button class="tab-btn" onclick="showOverview(this)" style="background:#e0f2fe;color:#0369A1;">📋 總覽</button>
+</div>
+
+<script>
+    // 從 localStorage 載入 checklist 狀態
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('.check-item input[type="checkbox"]');
+        checkboxes.forEach((cb, idx) => {
+            const saved = localStorage.getItem('checklist_' + idx);
+            if (saved === 'true') cb.checked = true;
+            cb.addEventListener('change', function() {
+                localStorage.setItem('checklist_' + idx, this.checked);
+            });
+        });
+    });
+
+    function showDay(dayId, btn) {
+        document.querySelectorAll('.day-content').forEach(d => d.classList.remove('active'));
+        document.getElementById(dayId).classList.add('active');
+        document.getElementById('overview').style.display = 'none';
+        document.getElementById('view-itinerary').style.display = 'block';
+        document.querySelectorAll('.tab-scroll-container .tab-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showOverview(btn) {
+        document.querySelectorAll('.day-content').forEach(d => d.classList.remove('active'));
+        document.getElementById('overview').style.display = 'block';
+        document.getElementById('view-itinerary').style.display = 'none';
+        document.querySelectorAll('.tab-scroll-container .tab-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goHome() {
+        showDay('d1', document.querySelector('.tab-scroll-container .tab-btn'));
+    }
+</script>
+
+</body>
+</html>
